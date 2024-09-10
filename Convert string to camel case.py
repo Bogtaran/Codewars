@@ -10,6 +10,7 @@
 
 "The_Stealth-Warrior" преобразуется в "TheStealthWarrior"""
 
+
 def to_camel_case(text):
     text2 = text.title()
     new_text = ''
@@ -18,6 +19,7 @@ def to_camel_case(text):
             new_text += i
     new_text = text[0] + new_text[1:]
     return new_text
+
 
 
 
