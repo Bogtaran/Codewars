@@ -15,10 +15,14 @@ def level_analysis(target_lvl):
         return sum(des(target_lvl))
     else:
         list_ = des(10)
-        c = list_[0]
-        for i in range(1,target_lvl//10):
-            c += math.floor(c * 0.25-i)
-            list_.append(c)
+        c = list_[-1]
+
+        for i in range(1, target_lvl//10+1):
+            KOEFF = 0.25 - 0.01*i
+            for j in range(target_lvl%10):
+                c += math.floor(c * KOEFF)
+                list_.append(c)
+        return list_
 
 
 
