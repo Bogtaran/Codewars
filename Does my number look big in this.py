@@ -24,3 +24,4 @@ def narcissistic(value):
 
 if __name__ == '__main__':
     print(narcissistic(1652))
+

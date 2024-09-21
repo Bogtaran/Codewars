@@ -28,4 +28,13 @@ def domain_name(url):
     return domain
 
 
+def domain_name(url):
+    return url.split("//")[-1].split("www.")[-1].split(".")[0]
 
+
+def domain_name(url):
+    url = url.replace('www.', '')
+    url = url.replace('https://', '')
+    url = url.replace('http://', '')
+
+    return url[0:url.find('.')]
