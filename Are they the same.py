@@ -40,6 +40,15 @@ def comp(array1, array2):
         return sorted(array1) == sorted(array2)
 
 
+def comp(array1, array2):
+    if type(array1) == None or type(array2) == None:
+        return False
+    else:
+        array1 = set(array1)
+        array2 = set(j ** (1 / 2) for j in array2 if type(j) == int)
+        return array1 == array2
+
+
 if __name__ == '__main__':
 
     a = [121, 144, 19, 161, 19, 144, 19, 11]
