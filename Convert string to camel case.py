@@ -12,14 +12,15 @@
 
 
 def to_camel_case(text):
-    text2 = text.title()
-    new_text = ''
-    for i in text2:
-        if i.isalpha():
-            new_text += i
-    new_text = text[0] + new_text[1:]
-    return new_text
+    if len(text) >= 1:
+        text2 = text[0] + text.title()[1:]
+        new_text = [i for i in text2 if i.isalpha()]
+        return ''.join(new_text)
+    else:
+        return ""
 
 
+if __name__ == '__main__':
+    print(to_camel_case("the-stealth-warrior"))
 
 
