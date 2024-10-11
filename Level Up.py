@@ -61,13 +61,13 @@ def xp_to_target_lvl(current_xp=-1, target_lvl=-1):
 
 
 def level_analysis(target_lvl):
-    list_ = [314]
+    _sum_ = 314
     c = 314
     for i in range(2, target_lvl):
         KOEFF = 0.25 - 0.01 * (i // 10)
         c += math.floor(c * KOEFF)
-        list_.append(c)
-    return sum(list_)
+        _sum_ += c
+    return _sum_
 
 
 if __name__ == '__main__':
