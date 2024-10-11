@@ -19,19 +19,38 @@ def gen():
 """
 
 def multiiter(*params):
-    params = list(params)
-    if len(params) == 1:
-        for i in range(params[0]):
-            yield (i,)
+    my_tuple = tuple(params)
+    list_iter = []
+    my_tuple = izm_params(my_tuple)
+    list_iter.append(my_tuple)
+    while my_tuple != (0,) * len(params):
+        for j in range(len(params)):
+            my_tuple = umen_params(my_tuple, j)
+            list_iter.append(my_tuple)
+
+    return print(list_iter)
+
+
+def izm_params(params):
+    my_tuple = tuple()
+    for i in range(len(params)):
+        if params[i] == 0:
+            my_tuple += (0,)
+        else:
+            my_tuple += (params[i] - 1,)
+    return my_tuple
+
+
+def umen_params(params, j):
+    my_tuple = tuple()
+    if params[j] == 0:
+        my_tuple += (0,)
     else:
-        for i in range(params[0]):
-            for j in range(params[1]):
-                yield (i, j)
+        my_tuple += (params[j] - 1,)
+    return my_tuple
 
-
-gen = multiiter(2)
 
 
 if __name__ == '__main__':
-    for i in gen:
-        print(i)
+    print((0,) * 3)
+    multiiter(2, 3, 4)
