@@ -1,11 +1,8 @@
 def multiiter(*params):
     my_tuple = tuple(params)
     if len(my_tuple) == 1:
-        if my_tuple == (0,):
-            return []
-        else:
-            for i in initial_list(params):
-                yield i
+        for i in initial_list(params):
+            yield i
 
 
     else:
@@ -29,7 +26,7 @@ def increase_list(list_iter, j):
     for a in list_iter:
         for i in range(j):
             new_list_iter.append(a + (i,))
-    return sorted(new_list_iter)
+    return new_list_iter
 
 
 if __name__ == '__main__':
