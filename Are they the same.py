@@ -31,21 +31,19 @@ a или b может быть None
 Если a или b являются nil (или null or None, в зависимости от языка), проблема не имеет смысла, поэтому верните false .
 """
 
+
 def comp(array1, array2):
-    if type(array1) == None or type(array2) == None:
+    if type(array1) not in (list, set) or type(array2) not in (list, set):
         return False
     else:
-        array1 = [i for i in array1 if type(i) == int]
-        array2 = [j ** (1 / 2) for j in array2 if type(j) == int]
+        array1 = [i**2 for i in array1]
+        array2 = [j for j in array2]
         return sorted(array1) == sorted(array2)
 
 
-
-
 if __name__ == '__main__':
-
     a = [121, 144, 19, 161, 19, 144, 19, 11]
     b = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
+    print(comp(a,b))
 
-    print(comp(a, b))
 
