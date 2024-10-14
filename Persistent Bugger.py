@@ -9,7 +9,37 @@
 4 --> 0 (because 4 is already a one-digit number, there is no multiplication)"""
 
 
+# В качестве предварительного упражнения: напишите функцию digits(x: int) -> List[int], которая возвращает список цифр
+# десятичной записи числа х. Например, digits(47029) == [4,7,0,2,9].
+
+
+'''Решение № 1'''
 def persistence(n):
+    count = 0
+    if n // 10 == 0:
+        return 0
+    else:
+        num = digits(n)
+        count += 1
+
+        while num // 10 != 0:
+            num = digits(num)
+            count += 1
+
+        return count
+
+
+def digits(n):
+    n = f'{n}'
+    num = 1
+    list_digit = [int(i) for i in n]
+    for i in list_digit:
+        num *= i
+    return num
+
+
+'''Решение № 2'''
+def persistence_2(n):
     count = 0
     if len(str(n)) == 1:
         return 0
@@ -23,5 +53,6 @@ def persistence(n):
         return count
 
 
-
-
+if __name__ == '__main__':
+    print(persistence(39))
+    print(persistence_2(39))
