@@ -66,4 +66,8 @@ def sum_num_key(num, key):
 
 if __name__ == '__main__':
     assert encode('', 12) == []
+    assert index('a') == [1]
+    assert index('ab') == [1, 2]
+    assert sum_num_key([1, 2], 12) == [2, 4]
+    assert encode('ab', 12) == [2, 4]
     print(encode("scout", 1939))
