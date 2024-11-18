@@ -36,15 +36,19 @@ Encode("scout",1939);  ==>  [ 20, 12, 18, 30, 21]
 Encode("masterpiece",1939);  ==>  [ 14, 10, 22, 29, 6, 27, 19, 18, 6, 12, 8]
 '''
 
+import string
+
+
 def encode(message, key):
+    if len(message) == 0:
+        return []
     num = index(message)
     encod = sum_num_key(num, key)
     return encod
 
 
 def index(message):
-    alf = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-           'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    alf = string.ascii_lowercase
     num = []
     for i in message:
         num.append(alf.index(i) + 1)
@@ -61,4 +65,5 @@ def sum_num_key(num, key):
 
 
 if __name__ == '__main__':
+    assert encode('', 12) == []
     print(encode("scout", 1939))
