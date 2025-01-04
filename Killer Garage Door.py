@@ -35,33 +35,37 @@ def controller(events):
             if number == 0:
                 if i == '.':
                     output += f'{number}'
-                elif events[i] == 'P':
-                    number+=1
+                elif i == 'P':
+                    number += 1
                     output += f'{number}'
-            else:
+            elif 1 <= number < 5:
+                if i == '.':
+                    number += 1
+                    output += f'{number}'
+                elif i == 'P':
+                    number -= 1
+                    output += f'{number}'
+
+    if events[1] == '.':
+        output = '1'
+        number = 1
+        for i in events[1:len(events)]:
+            if number == 0:
                 if i == '.':
                     output += f'{number}'
-                elif events[i] == 'P':
-                    number+=1
+                elif i == 'P':
+                    number += 1
                     output += f'{number}'
-
-
-
-
-    elif events[0] == 'P':
-        output = '1'
-
-
+            elif 1 <= number < 5:
+                if i == '.':
+                    number += 1
+                    output += f'{number}'
+                elif i == 'P':
+                    number -= 1
+                    output += f'{number}'
     return output
-
-
-a = events[i]
-b = output[-1]
-
-def sequence_point(a,b):
-
 
 
 
 if __name__ == '__main__':
-    main()
+    controller('P....')
