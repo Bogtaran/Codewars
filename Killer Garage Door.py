@@ -25,47 +25,52 @@
 ..P...O..... как входные данные должны давать результат 001234321000 как выходные
 """
 
-
-def controller(events):
+def controller2(events):
     output = ''
-    if events[0] == '.':
-        output = '0'
-        number = 0
-        for i in events[1:len(events)]:
-            if number == 0:
-                if i == '.':
-                    output += f'{number}'
-                elif i == 'P':
-                    number += 1
-                    output += f'{number}'
-            elif 1 <= number < 5:
-                if i == '.':
-                    number += 1
-                    output += f'{number}'
-                elif i == 'P':
-                    number -= 1
-                    output += f'{number}'
+    close = True
+    number = 0
+    counter = 0
+    stop = False
+    for i in events:
+        if i == '.' and close:
+            counter += 1
+            output += f'{number}'
+        elif i == 'P' and close and not stop:
+            counter += 1
+            number = 1
+            close = False
+            output += f'{number}'
+        elif i == '.' and not close and not stop:
+            if number != 5:
+                counter += 1
+                number += 1
+                output += f'{number}'
+            else:
+                counter += 1
+                output += f'{number}'
 
-    if events[1] == '.':
-        output = '1'
-        number = 1
-        for i in events[1:len(events)]:
-            if number == 0:
-                if i == '.':
-                    output += f'{number}'
-                elif i == 'P':
-                    number += 1
-                    output += f'{number}'
-            elif 1 <= number < 5:
-                if i == '.':
-                    number += 1
-                    output += f'{number}'
-                elif i == 'P':
-                    number -= 1
-                    output += f'{number}'
+
+
+        elif i == 'P' and number == 5:
+            counter += 1
+            number = 4
+            output += f'{number}'
+        elif i == '.' and close:
+            if number != 5:
+                counter += 1
+                number += 1
+                output += f'{number}'
+            else:
+                counter += 1
+                output += f'{number}'
+
+
     return output
 
 
-
 if __name__ == '__main__':
-    controller('P....')
+    print(controller2('....'))
+    print(controller2('.P.........'))
+    print(controller2('.P......P..'))
+    print(controller2('.P...P..'))
+
