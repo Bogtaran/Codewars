@@ -53,14 +53,10 @@ def controller(events):
             elif i == 'P' and stop and opening_process:
                 number -= 1
                 stop = False
-                opening_process = False
-                closed_process = True
                 output += f'{number}'
             elif i == 'P' and stop and closed_process:
                 number -= 1
                 stop = False
-                opening_process = True
-                closed_process = False
                 output += f'{number}'
             elif i == '.' and opening_process:
                 number += 1
@@ -97,8 +93,8 @@ def controller(events):
 
 
 if __name__ == '__main__':
-    print(controller2('....'))
-    print(controller2('.P.........'))
-    print(controller2('.P......P..'))
-    print(controller2('.P...P..'))
-    print(controller2('.P...P..P....'))
+    print(controller('....'))
+    print(controller('.P.........'))
+    print(controller('.P......P........P...'))
+    print(controller('.P...P..'))
+    print(controller('.P...P..P....'))
