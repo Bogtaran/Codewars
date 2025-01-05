@@ -51,7 +51,7 @@ def controller(events):
             if i == '.' and stop:
                 output += f'{number}'
             elif i == 'P' and stop and opening_process:
-                number -= 1
+                number += 1
                 stop = False
                 output += f'{number}'
             elif i == 'P' and stop and closed_process:
