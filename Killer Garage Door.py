@@ -31,6 +31,7 @@ def controller2(events):
     number = 0
     counter = 0
     stop = False
+    closed_process = False
     for i in events:
         if i == '.' and close:
             counter += 1
@@ -48,21 +49,16 @@ def controller2(events):
             else:
                 counter += 1
                 output += f'{number}'
-
-
-
         elif i == 'P' and number == 5:
             counter += 1
             number = 4
+            closed_process = True
             output += f'{number}'
-        elif i == '.' and close:
-            if number != 5:
-                counter += 1
-                number += 1
-                output += f'{number}'
-            else:
-                counter += 1
-                output += f'{number}'
+        elif i == '.' and closed_process:
+            counter += 1
+            number -= 1
+            output += f'{number}'
+
 
 
     return output
