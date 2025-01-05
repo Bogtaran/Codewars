@@ -37,7 +37,6 @@ def controller(events):
     output = ''
     number = 0
     stop = False
-    closed_process = False
     opening_process = False
     for i in events:
         if number == 0:
@@ -54,30 +53,28 @@ def controller(events):
                 number += 1
                 stop = False
                 output += f'{number}'
-            elif i == 'P' and stop and closed_process:
+            elif i == 'P' and stop and not opening_process:
                 number -= 1
                 stop = False
                 output += f'{number}'
             elif i == '.' and opening_process:
                 number += 1
                 output += f'{number}'
-            elif i == '.' and closed_process:
+            elif i == '.' and not opening_process:
                 number -= 1
                 output += f'{number}'
             elif i == 'P' and opening_process:
                 stop = True
                 output += f'{number}'
-            elif i == 'P' and closed_process:
+            elif i == 'P' and not opening_process:
                 stop = True
                 output += f'{number}'
             elif i == 'O' and opening_process:
                 opening_process = False
-                closed_process = True
                 number -= 1
                 output += f'{number}'
-            elif i == 'O' and closed_process:
+            elif i == 'O' and not opening_process:
                 opening_process = True
-                closed_process = False
                 number += 1
                 output += f'{number}'
         elif number == 5:
@@ -86,7 +83,6 @@ def controller(events):
                 output += f'{number}'
             elif i == 'P':
                 number = 4
-                closed_process = True
                 output += f'{number}'
 
     return output
