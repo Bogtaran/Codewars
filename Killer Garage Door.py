@@ -8,7 +8,8 @@
 Если дверь закрыта, нажатие на кнопку открывает её, и наоборот
 Для полного открытия или закрытия двери требуется 5 секунд
 Пока дверь движется, один толчок останавливает движение, другой толчок возобновляет движение в том же направлении
-Чтобы сделать дверь более безопасной, она оснащена системой обнаружения препятствий на основе сопротивления. При обнаружении препятствия дверь должна немедленно изменить направление движения.
+Чтобы сделать дверь более безопасной, она оснащена системой обнаружения препятствий на основе сопротивления.
+При обнаружении препятствия дверь должна немедленно изменить направление движения.
 
 Входные данные
 Строка, в которой каждый символ представляет одну секунду, со следующими возможными значениями.
@@ -25,6 +26,7 @@
 ..P...O..... как входные данные должны давать результат 001234321000 как выходные
 """
 
+
 def controller2(events):
     output = ''
     close = True
@@ -32,34 +34,73 @@ def controller2(events):
     counter = 0
     stop = False
     closed_process = False
+    opening_process = False
     for i in events:
-        if i == '.' and close:
-            counter += 1
-            output += f'{number}'
-        elif i == 'P' and close and not stop:
-            counter += 1
-            number = 1
-            close = False
-            output += f'{number}'
-        elif i == '.' and not close and not stop:
-            if number != 5:
+        if number == 0:
+            if i == '.':
+                counter += 1
+                output += f'{number}'
+            elif i == 'P':
+                counter += 1
+                number = 1
+                opening_process = True
+                output += f'{number}'
+        elif 0 < number < 5:
+            if i == '.' and stop:
+                counter += 1
+                output += f'{number}'
+            elif i == 'P' and stop and opening_process:
+                counter += 1
+                number -= 1
+                stop = False
+                opening_process = False
+                closed_process = True
+                output += f'{number}'
+            elif i == 'P' and stop and closed_process:
+                counter += 1
+                number -= 1
+                stop = False
+                opening_process = True
+                closed_process = False
+                output += f'{number}'
+            elif i == '.' and opening_process:
                 counter += 1
                 number += 1
                 output += f'{number}'
-            else:
+            elif i == '.' and closed_process:
+                counter += 1
+                number -= 1
+                output += f'{number}'
+            elif i == 'P' and opening_process:
+                counter += 1
+                stop = True
+                output += f'{number}'
+            elif i == 'P' and closed_process:
+                counter += 1
+                stop = True
+                output += f'{number}'
+            elif i == 'O' and opening_process:
+                counter += 1
+                opening_process = False
+                closed_process = True
+                number -=1
+                output += f'{number}'
+            elif i == 'O' and closed_process:
+                counter += 1
+                opening_process = True
+                closed_process = False
+                number += 1
+                output += f'{number}'
+        elif number == 5:
+            opening_process = False
+            if i == '.':
                 counter += 1
                 output += f'{number}'
-        elif i == 'P' and number == 5:
-            counter += 1
-            number = 4
-            closed_process = True
-            output += f'{number}'
-        elif i == '.' and closed_process:
-            counter += 1
-            number -= 1
-            output += f'{number}'
-
-
+            elif i == 'P':
+                counter += 1
+                number = 4
+                closed_process = True
+                output += f'{number}'
 
     return output
 
@@ -69,4 +110,4 @@ if __name__ == '__main__':
     print(controller2('.P.........'))
     print(controller2('.P......P..'))
     print(controller2('.P...P..'))
-
+    print(controller2('.P...P..P....'))

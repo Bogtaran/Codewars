@@ -30,4 +30,6 @@ def increase_list(list_iter, j):
 
 
 if __name__ == '__main__':
-    multiiter(2, 3, 4)
+    my_iter = multiiter(2, 3, 4)
+    for i in my_iter:
+        print(i)
